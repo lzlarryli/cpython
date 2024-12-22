@@ -623,6 +623,14 @@ and its :meth:`~Lock.release` method to unlock it.
   :meth:`~RLock.acquire` and :meth:`~RLock.release`
   to handle acquiring and releasing the lock for a block of code.
 
+.. note::
+
+  Reentrant locks are "owned" by the acquiring thread only throughout the
+  thread's life cycle. In particular, an RLock is fully released when the
+  acquiring thread returns. This is different from Lock, which remains locked
+  after its acquiring thread returns.
+  
+
 RLock's :meth:`~RLock.acquire`/:meth:`~RLock.release` call pairs may be nested,
 unlike Lock's :meth:`~Lock.acquire`/:meth:`~Lock.release`. Only the final
 :meth:`~RLock.release` (the :meth:`~Lock.release` of the outermost pair) resets
